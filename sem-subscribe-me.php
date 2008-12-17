@@ -4,7 +4,7 @@ Plugin Name: Subscribe Me
 Plugin URI: http://www.semiologic.com/software/widgets/subscribe-me/
 Description: Adds widgets that let you display feed subscription buttons.
 Author: Denis de Bernardy
-Version: 4.3.1
+Version: 4.3.2 alpha
 Author URI: http://www.getsemiologic.com
 */
 
@@ -73,50 +73,50 @@ class subscribe_me
 				'button' => 'rss.png',
 				'url' => apply_filters('bloginfo', get_feed_link('rss2'), 'rss2_url'),
 				),
-			'bloglines' => array(
-				'name' => 'Bloglines',
-				'button' => 'addbloglines.gif',
-				'url' => 'http://www.bloglines.com/sub/%feed_url%',
-				),
 			'google' => array(
 				'name' => 'Google',
 				'button' => 'addgoogle.gif',
 				'url' => 'http://fusion.google.com/add?feedurl=%feed_url%',
-				),
-			'yahoo' => array(
-				'name' => 'MyYahoo!',
-				'button' => 'addmyyahoo.gif',
-				'url' => 'http://add.my.yahoo.com/rss?url=%feed_url%',
 				),
 			'msn' => array(
 				'name' => 'MyMSN',
 				'button' => 'addmymsn.gif',
 				'url' => 'http://my.msn.com/addtomymsn.armx?id=rss&amp;ut=%feed_url%&amp;ru=%site_url%',
 				),
+			'yahoo' => array(
+				'name' => 'MyYahoo!',
+				'button' => 'addmyyahoo.gif',
+				'url' => 'http://add.my.yahoo.com/rss?url=%feed_url%',
+				),
 			'aol' => array(
 				'name' => 'MyAOL',
 				'button' => 'addmyaol.gif',
 				'url' => 'http://feeds.my.aol.com/add.jsp?url=%feed_url%',
 				),
-			'newsgator' => array(
-				'name' => 'Newsgator',
-				'button' => 'addnewsgator.gif',
-				'url' => 'http://www.newsgator.com/ngs/subscriber/subext.aspx?url=%feed_url%',
+			'bloglines' => array(
+				'name' => 'Bloglines',
+				'button' => 'addbloglines.gif',
+				'url' => 'http://www.bloglines.com/sub/%feed_url%',
+				),
+			'live' => array(
+				'name' => 'Windows Live',
+				'button' => 'addwindowslive.gif',
+				'url' => 'http://www.live.com/?add=%feed_url%',
 				),
 			'netvibes' => array(
 				'name' => 'Netvibes',
 				'button' => 'addnetvibes.gif',
 				'url' => 'http://www.netvibes.com/subscribe.php?url=%feed_url%',
 				),
+			'newsgator' => array(
+				'name' => 'Newsgator',
+				'button' => 'addnewsgator.gif',
+				'url' => 'http://www.newsgator.com/ngs/subscriber/subext.aspx?url=%feed_url%',
+				),
 			'pageflakes' => array(
 				'name' => 'Pageflakes',
 				'button' => 'addpageflakes.gif',
 				'url' => 'http://www.pageflakes.com/subscribe.aspx?url=%feed_url%',
-				),
-			'live' => array(
-				'name' => 'Windows Live',
-				'button' => 'addwindowslive.gif',
-				'url' => 'http://www.live.com/?add=%feed_url%',
 				),
 			'help_link' => array(
 				'name' => __('Help'),
