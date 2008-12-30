@@ -196,7 +196,7 @@ class subscribe_me
 		# process output
 
 		$as_dropdown = intval($args['dropdown']);
-		$home_url = get_option('home');
+		$home_url = user_trailingslashit(get_option('home'));
 		$o = '';
 
 		$o .= $args['before_widget'] . "\n"
