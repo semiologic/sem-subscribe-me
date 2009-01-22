@@ -3,8 +3,8 @@
 Plugin Name: Subscribe Me
 Plugin URI: http://www.semiologic.com/software/widgets/subscribe-me/
 Description: Adds widgets that let you display feed subscription buttons.
-Author: Denis de Bernardy
 Version: 4.3.2
+Author: Denis de Bernardy
 Author URI: http://www.getsemiologic.com
 */
 
