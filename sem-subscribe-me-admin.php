@@ -118,8 +118,8 @@ class subscribe_me_admin
 			;
 
 
-		$args['site_path'] = trailingslashit(get_option('siteurl'));
-		$args['img_path'] = trailingslashit(get_option('siteurl')) . 'wp-content/plugins/sem-subscribe-me/img/';
+		$args['site_path'] = trailingslashit(site_url());
+		$args['img_path'] = trailingslashit(site_url()) . 'wp-content/plugins/sem-subscribe-me/img/';
 
 		$o .= '<div style="width: 280px;">';
 

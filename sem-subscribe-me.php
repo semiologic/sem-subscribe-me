@@ -174,9 +174,9 @@ class subscribe_me
 
 		$args = array_merge($defaults, (array) $default_options, (array) $args);
 
-		$args['site_path'] = trailingslashit(get_option('siteurl'));
+		$args['site_path'] = trailingslashit(site_url());
 		$args['feed_url'] = apply_filters('bloginfo', get_feed_link('rss2'), 'rss2_url');
-		$args['img_path'] = trailingslashit(get_option('siteurl')) . 'wp-content/plugins/sem-subscribe-me/img/';
+		$args['img_path'] = trailingslashit(site_url()) . 'wp-content/plugins/sem-subscribe-me/img/';
 
 		$hash = md5(uniqid(rand()));
 
