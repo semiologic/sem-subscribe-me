@@ -3,7 +3,7 @@
 Plugin Name: Subscribe Me
 Plugin URI: http://www.semiologic.com/software/widgets/subscribe-me/
 Description: Adds widgets that let you display feed subscription buttons.
-Version: 4.3.2
+Version: 4.3.3 alpha
 Author: Denis de Bernardy
 Author URI: http://www.getsemiologic.com
 */
@@ -36,7 +36,8 @@ class subscribe_me
 	
 	function init()
 	{
-		add_action('wp_head', array('subscribe_me', 'css'));
+		add_action('wp_print_styles', array('subscribe_me', 'css'));
+		
 		if ( !is_admin() )
 		{
 			add_action('wp_print_scripts', array('subscribe_me', 'js'));
@@ -324,12 +325,10 @@ class subscribe_me
 
 	function css()
 	{
-		echo '<link rel="stylesheet" type="text/css"'
-			. ' href="'
-				. trailingslashit(get_option('siteurl'))
-				. 'wp-content/plugins/sem-subscribe-me/sem-subscribe-me.css?ver=4.2'
-				. '"'
-			. ' />' . "\n";
+		$folder = plugins_url() . '/' . basename(dirname(__FILE__));
+		$css = $folder . '/sem-subscribe-me.css';
+		
+		wp_enqueue_style('subscribe_me', $css, null, '4.3.3');
 	} # css()
 
 
@@ -339,11 +338,10 @@ class subscribe_me
 
 	function js()
 	{
-		$plugin_path = plugin_basename(__FILE__);
-		$plugin_path = preg_replace("/[^\/]+$/", '', $plugin_path);
-		$plugin_path = '/wp-content/plugins/' . $plugin_path;
+		$folder = plugins_url() . '/' . basename(dirname(__FILE__));
+		$js = $folder . '/sem-subscribe-me.js';
 		
-		wp_enqueue_script( 'subscribe_me', $plugin_path . 'sem-subscribe-me.js', false, '20080416' );
+		wp_enqueue_script('subscribe_me', $js, null, '20080416');
 	} # js()
 
 
