@@ -473,7 +473,7 @@ class subscribe_me
 	{
 		$o = subscribe_me::get_options();
 		$k = time();
-		do $k++; while ( isset($o[$k]) );
+		while ( isset($o[$k]) ) $k++;
 		$o[$k] = subscribe_me::default_options();
 		
 		update_option('subscribe_me_widgets', $o);
