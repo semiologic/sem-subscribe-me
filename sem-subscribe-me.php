@@ -262,7 +262,7 @@ class subscribe_me {
 				'url' => 'http://www.newsgator.com/ngs/subscriber/subext.aspx?url=%enc_feed%',
 				),
 			'yahoo' => array(
-				'name' => __('MyYahoo!', 'subscribe-me'),
+				'name' => __('Yahoo!', 'subscribe-me'),
 				'url' => 'http://add.my.yahoo.com/rss?url=%enc_feed%',
 				),
 			'help' => array(
