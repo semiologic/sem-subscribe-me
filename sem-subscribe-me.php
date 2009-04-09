@@ -3,7 +3,7 @@
 Plugin Name: Subscribe Me
 Plugin URI: http://www.semiologic.com/software/subscribe-me/
 Description: Adds widgets that let you display feed subscription buttons.
-Version: 4.3.3 alpha
+Version: 5.0 alpha
 Author: Denis de Bernardy
 Author URI: http://www.getsemiologic.com
 */
@@ -16,521 +16,425 @@ This software is copyright Mesoconcepts (http://www.mesoconcepts.com), and is di
 
 http://www.opensource.org/licenses/gpl-2.0.php
 
+Fam Fam Fam silk icon (feed_add and information) are copyright Mark James (http://www.famfamfam.com/lab/icons/silk/), and CC-By licensed:
 
-Hat tips
---------
+http://creativecommons.org/licenses/by/2.5/
 
-	* James Huff <http://www.macmanx.com>
-	* Duke Thor <http://blog.dukethor.info>
-	* Mike Koepke <http://www.mikekoepke.com>
+Large feed icons are copyright feedicons.com.
+
+Other icons are copyright their respective holders.
 **/
 
 
-load_plugin_textdomain('sem-subscribe-me');
+/**
+ * subscribe_me
+ *
+ * @package Subscribe Me
+ **/
 
-class subscribe_me
+add_action('widgets_init', array('subscribe_me', 'widgetize'));
+add_action('wp_print_scripts', array('subscribe_me', 'js'));
+add_action('wp_print_styles', array('subscribe_me', 'css'));
+
+foreach ( array(
+		'generate_rewrite_rules',
+		'switch_theme',
+		'update_option_active_plugins',
+		'update_option_sidebars_widgets',
+		) as $hook)
 {
-	#
-	# init()
-	#
-	
-	function init()
-	{
-		add_action('wp_print_styles', array('subscribe_me', 'css'));
-		
-		if ( !is_admin() )
-		{
-			add_action('wp_print_scripts', array('subscribe_me', 'js'));
-		}
-		
-		add_action('widgets_init', array('subscribe_me', 'widgetize'));
-		
-		foreach ( array(
-				'generate_rewrite_rules',
-				'switch_theme',
-				'update_option_active_plugins',
-				'update_option_show_on_front',
-				'update_option_page_on_front',
-				'update_option_page_for_posts',
-				'update_option_sidebars_widgets',
-				'update_option_sem5_options',
-				'update_option_sem6_options',
-				) as $hook)
-		{
-			add_action($hook, array('subscribe_me', 'clear_cache'));
-		}
-		
-		register_activation_hook(__FILE__, array('subscribe_me', 'clear_cache'));
-		register_deactivation_hook(__FILE__, array('subscribe_me', 'clear_cache'));
-	} # init()
-	
-	
-	#
-	# get_services()
-	#
+	add_action($hook, array('subscribe_me', 'clear_cache'));
+}
 
-	function get_services()
-	{
-		return array(
-			'local_feed' => array(
-				'name' => __('RSS Feed'),
-				'button' => 'rss.png',
-				'url' => apply_filters('bloginfo', get_feed_link('rss2'), 'rss2_url'),
-				),
-			'google' => array(
-				'name' => 'Google',
-				'button' => 'addgoogle.gif',
-				'url' => 'http://fusion.google.com/add?feedurl=%feed_url%',
-				),
-			'msn' => array(
-				'name' => 'MyMSN',
-				'button' => 'addmymsn.gif',
-				'url' => 'http://my.msn.com/addtomymsn.armx?id=rss&amp;ut=%feed_url%&amp;ru=%site_url%',
-				),
-			'yahoo' => array(
-				'name' => 'MyYahoo!',
-				'button' => 'addmyyahoo.gif',
-				'url' => 'http://add.my.yahoo.com/rss?url=%feed_url%',
-				),
-			'aol' => array(
-				'name' => 'MyAOL',
-				'button' => 'addmyaol.gif',
-				'url' => 'http://feeds.my.aol.com/add.jsp?url=%feed_url%',
-				),
-			'bloglines' => array(
-				'name' => 'Bloglines',
-				'button' => 'addbloglines.gif',
-				'url' => 'http://www.bloglines.com/sub/%feed_url%',
-				),
-			'live' => array(
-				'name' => 'Windows Live',
-				'button' => 'addwindowslive.gif',
-				'url' => 'http://www.live.com/?add=%feed_url%',
-				),
-			'netvibes' => array(
-				'name' => 'Netvibes',
-				'button' => 'addnetvibes.gif',
-				'url' => 'http://www.netvibes.com/subscribe.php?url=%feed_url%',
-				),
-			'newsgator' => array(
-				'name' => 'Newsgator',
-				'button' => 'addnewsgator.gif',
-				'url' => 'http://www.newsgator.com/ngs/subscriber/subext.aspx?url=%feed_url%',
-				),
-			'pageflakes' => array(
-				'name' => 'Pageflakes',
-				'button' => 'addpageflakes.gif',
-				'url' => 'http://www.pageflakes.com/subscribe.aspx?url=%feed_url%',
-				),
-			'help_link' => array(
-				'name' => __('Help'),
-				'button' =>'help.gif',
-				'url' => 'http://www.semiologic.com/resources/blogging/help-with-feeds/'
-				),
-			);
-	} # get_services()
+register_activation_hook(__FILE__, array('subscribe_me', 'clear_cache'));
+register_deactivation_hook(__FILE__, array('subscribe_me', 'clear_cache'));
 
+class subscribe_me {
+	/**
+	 * js()
+	 *
+	 * @return void
+	 **/
 
-	#
-	# default_services()
-	#
-
-	function default_services()
-	{
-		return array(
-			'local_feed',
-			'bloglines',
-			'help_link'
-			);
-	} # default_services()
-
-
-	#
-	# get_service()
-	#
-
-	function get_service($key)
-	{
-		$services = subscribe_me::get_services();
-
-		return $services[$key];
-	} # get_service()
-
-
-	#
-	# display()
-	#
-
-	function display($args = null)
-	{
-		# default args
-
-		$defaults = array(
-			'title' => __('Syndicate'),
-			'before_widget' => '',
-			'after_widget' => '',
-			'before_title' => '<h2>',
-			'after_title' => '</h2>'
-			);
-
-		$default_options = subscribe_me::default_options();
-
-		$args = array_merge($defaults, (array) $default_options, (array) $args);
-
-		$args['site_path'] = trailingslashit(site_url());
-		$args['feed_url'] = apply_filters('bloginfo', get_feed_link('rss2'), 'rss2_url');
-		$args['img_path'] = trailingslashit(site_url()) . 'wp-content/plugins/sem-subscribe-me/img/';
-
-		$hash = md5(uniqid(rand()));
-
-		$cache_id = md5(serialize($args));
-		
-		$cache = get_option('subscribe_me_cache');
-
-		# return cache if relevant
-
-		if ( $o = $cache[$cache_id] )
-		{
-			$o = str_replace('{$hash}', $hash, $o);
-
-			return $o;
-		}
-
-
-		# process output
-
-		$as_dropdown = intval($args['dropdown']);
-		$home_url = user_trailingslashit(get_option('home'));
-		$o = '';
-
-		$o .= $args['before_widget'] . "\n"
-			. ( $args['title']
-				? ( $args['before_title'] . $args['title'] . $args['after_title'] . "\n" )
-				: ''
-				);
-
-		$o .= '<div'
-				. ( $as_dropdown
-					? ( ' onmouseover="fade_subscribe_buttons_in(\'subscribe_me_{$hash}\');"'
-						. ' onmouseout="fade_subscribe_buttons_out(\'subscribe_me_{$hash}\');"'
-						)
-					: ''
-					)
-				. '>' . "\n";
-
-		if ( $as_dropdown )
-		{
-			$o .= '<div class="subscribe_service">'
-				. '<a href="'
-					. $args['feed_url']
-					. '">'
-				. '<img'
-					. ' src="' . $args['img_path'] . 'subscribe.gif"'
-					. ' alt="' . __('RSS Feed') . '"'
-					. ' />'
-				. '</a>'
-				. '</div>' . "\n";
-		}
-
-		$o .= '<div'
-			. ' class="subscribe_services' . ( $as_dropdown ? ' subscribe_dropdown' : '' ) . '"'
-			. ' id="subscribe_me_{$hash}"'
-			. '>';
-
-		if ( $as_dropdown ) $o .= '<div style="clear: both;"></div>' . "\n";
-
-		foreach ( (array) $args['services'] as $service )
-		{
-			$details = subscribe_me::get_service($service);
-
-			if ( $details )
-			{
-				switch( $service )
-				{
-				case 'local_feed':
-				case 'help_link':
-					$o .= '<div class="subscribe_service">'
-						. '<a'
-							. ' href="' . $details['url'] . '"'
-							. ' style="background: url('
-								. $args['img_path'] . $details['button']
-								. ')'
-								. ' center left no-repeat;'
-								. ' padding: 2px 0px 2px 18px;"'
-							. ( ( $args['add_nofollow'] && $service != 'local_feed'
-									&& strpos($details['url'], $home_url) !== 0 )
-								? ' rel="nofollow"'
-								: ''
-								)
-							. '>'
-						. $details['name']
-						. '</a>'
-						. '</div>' . "\n";
-					break;
-				default:
-					$o .= '<div class="subscribe_service">'
-						. '<a'
-							. ' href="'
-								. str_replace(
-									'%site_url%',
-									urlencode($args['site_path']),
-									str_replace(
-										'%feed_url%',
-										( strpos($details['url'], '?') !== false
-											? urlencode($args['feed_url'])
-											: $args['feed_url']
-											),
-										$details['url']
-										)
-									) . '"'
-							. ( $args['add_nofollow']
-								? ' rel="nofollow"'
-								: ''
-								)
-							. '>'
-						. '<img'
-							. ' src="' . $args['img_path'] . $details['button'] . '"'
-							. ' alt="' . str_replace('%feed%', $details['name'], __('Subscribe to %feed%')) . '"'
-							. ' />'
-						. '</a>'
-						. '</div>' . "\n";
-					break;
-				}
-			}
-		}
-
-		if ( $as_dropdown ) $o .= '<div style="clear: both;"></div>' . "\n";
-
-		$o .= '</div>' . "\n";
-
-		$o .= '</div>' . "\n"
-			. $args['after_widget'] . "\n";
-
-
-		# store output
-
-		$cache[$cache_id] = $o;
-	
-		update_option('subscribe_me_cache', $cache);
-
-
-		# return output
-
-		$o = str_replace('{$hash}', $hash, $o);
-
-		return $o;
-	} # display()
-
-
-	#
-	# css()
-	#
-
-	function css()
-	{
+	function js() {
 		$folder = plugins_url() . '/' . basename(dirname(__FILE__));
-		$css = $folder . '/sem-subscribe-me.css';
-		
-		wp_enqueue_style('subscribe_me', $css, null, '4.3.3');
-	} # css()
-
-
-	#
-	# js()
-	#
-
-	function js()
-	{
-		$folder = plugins_url() . '/' . basename(dirname(__FILE__));
-		$js = $folder . '/sem-subscribe-me.js';
-		
-		wp_enqueue_script('subscribe_me', $js, null, '20080416');
+		wp_enqueue_script('subscribe_me', $folder . '/js/scripts.js', array('jquery'), '5.0');
 	} # js()
+	
+	
+	/**
+	 * css()
+	 *
+	 * @return void
+	 **/
 
+	function css() {
+		$folder = plugins_url() . '/' . basename(dirname(__FILE__));
+		wp_enqueue_style('subscribe_me', $folder . '/css/styles.css', false, '5.0');
+	} # css()
+	
+	
+	/**
+	 * widgetize()
+	 *
+	 * @return void
+	 **/
 
-	#
-	# widgetize()
-	#
-
-	function widgetize()
-	{
+	function widgetize() {
 		$options = subscribe_me::get_options();
-
-		$widget_options = array('classname' => 'subscribe_me', 'description' => __( "Feed subscription buttons") );
-		$control_options = array('width' => 300, 'id_base' => 'subscribe_me');
-
+		
+		$widget_options = array('classname' => 'subscribe_me', 'description' => __( "Feed subscription buttons for your site", 'subscribe-me') );
+		$control_options = array('id_base' => 'subscribe_me', 'width' => 420);
+		
 		$id = false;
-
+		
 		# registered widgets
-		foreach ( array_keys($options) as $o )
-		{
+		foreach ( array_keys($options) as $o ) {
 			if ( !is_numeric($o) ) continue;
 			$id = "subscribe_me-$o";
-			wp_register_sidebar_widget($id, __('Subscribe Me'), array('subscribe_me', 'display_widget'), $widget_options, array( 'number' => $o ));
-			wp_register_widget_control($id, __('Subscribe Me'), array('subscribe_me_admin', 'widget_control'), $control_options, array( 'number' => $o ) );
+			wp_register_sidebar_widget($id, __('Subscribe Me', 'subscribe-me'), array('subscribe_me', 'widget'), $widget_options, array( 'number' => $o ));
+			wp_register_widget_control($id, __('Subscribe Me', 'subscribe-me'), array('subscribe_me_admin', 'widget_control'), $control_options, array( 'number' => $o ) );
 		}
-
+		
 		# default widget if none were registered
-		if ( !$id )
-		{
+		if ( !$id ) {
 			$id = "subscribe_me-1";
-			wp_register_sidebar_widget($id, __('Subscribe Me'), array('subscribe_me', 'display_widget'), $widget_options, array( 'number' => -1 ));
-			wp_register_widget_control($id, __('Subscribe Me'), array('subscribe_me_admin', 'widget_control'), $control_options, array( 'number' => -1 ) );
+			wp_register_sidebar_widget($id, __('Subscribe Me', 'subscribe-me'), array('subscribe_me', 'widget'), $widget_options, array( 'number' => -1 ));
+			wp_register_widget_control($id, __('Subscribe Me', 'subscribe-me'), array('subscribe_me_admin', 'widget_control'), $control_options, array( 'number' => -1 ) );
 		}
 	} # widgetize()
+	
+	
+	/**
+	 * widget()
+	 *
+	 * @param array $args
+	 * @param array $widget_args
+	 * @return void
+	 **/
 
-
-	#
-	# display_widget()
-	#
-
-	function display_widget($args, $widget_args = 1)
-	{
+	function widget($args, $widget_args = 1) {
+		if ( is_feed() || isset($_GET['action']) && $_GET['action'] == 'print' )
+			return;
+		
 		$options = subscribe_me::get_options();
 		
 		if ( is_numeric($widget_args) )
 			$widget_args = array( 'number' => $widget_args );
 		$widget_args = wp_parse_args( $widget_args, array( 'number' => -1 ) );
-		extract( $widget_args, EXTR_SKIP );
+		extract($widget_args, EXTR_SKIP);
 		
 		$args = array_merge((array) $options[$number], (array) $args);
 		
-		if ( is_admin() )
-		{
-			echo $args['before_widget']
-				. $args['before_title']
-				. $args['title']
-				. $args['after_title']
-				. $args['after_widget'];
-			
+		extract($args, EXTR_SKIP);
+		
+		if ( is_admin() ) {
+			echo $before_widget
+				. $before_title . $title . $after_title
+				. $after_widget;
 			return;
 		}
 		
-		echo subscribe_me::display($args);
-	} # display_widget()
-
-
-	#
-	# get_options()
-	#
-
-	function get_options()
-	{
-		if ( ( $o = get_option('subscribe_me_widgets') ) === false )
-		{
-			if ( ( $o = get_option('sem_subscribe_me_params') ) !== false )
-			{
-				unset($o['before_widget']);
-				unset($o['after_widget']);
-				unset($o['before_title']);
-				unset($o['after_title']);
-
-				$o['services'] = get_option('sem_subscribe_me_services');
-
-				if ( !$o['services'] )
-				{
-					$defaults = subscribe_me::default_options();
-					$o['services'] = $defaults['services'];
-				}
-				
-				$o = array( 1 => $o );
-
-				foreach ( array_keys( $sidebars = get_option('sidebars_widgets') ) as $k )
-				{
-					if ( !is_array($sidebars[$k]) )
-					{
-						continue;
+		if ( !( $o = wp_cache_get($widget_id, 'widget') ) ) {
+			# check if the widget has a class
+			if ( strpos($before_widget, 'subscribe_me') === false ) {
+				if ( preg_match("/^(<[^>]+>)/", $before_widget, $tag) ) {
+					if ( preg_match("/\bclass\s*=\s*(\"|')(.*?)\\1/", $tag[0], $class) ) {
+						$tag[1] = str_replace($class[2], $class[2] . ' subscribe_me', $tag[1]);
+					} else {
+						$tag[1] = str_replace('>', ' class="subscribe_me"', $tag[1]);
 					}
-
-					if ( ( $key = array_search('subscribe-me', $sidebars[$k]) ) !== false )
-					{
-						$sidebars[$k][$key] = 'subscribe_me-1';
-						update_option('sidebars_widgets', $sidebars);
-						break;
-					}
-					elseif ( ( $key = array_search('Subscribe Me', $sidebars[$k]) ) !== false )
-					{
-						$sidebars[$k][$key] = 'subscribe_me-1';
-						update_option('sidebars_widgets', $sidebars);
-						break;
-					}
+					$before_widget = preg_replace("/^$tag[0]/", $tag[1], $before_widget);
+				} else {
+					$before_widget = '<div class="subscribe_me">' . $before_widget;
+					$after_widget = $after_widget . '</div>' . "\n";
 				}
 			}
-			else
-			{
-				$o = array();
+			
+			$site_url = user_trailingslashit(site_url());
+			$feed_url = user_trailingslashit(apply_filters('bloginfo', get_feed_link('rss2'), 'rss2_url'));
+			$icons_url = plugins_url() . '/' . basename(dirname(__FILE__)) . '/icons';
+
+			ob_start();
+			
+			echo $before_widget;
+			
+			if ( $title )
+				echo $before_title . $title . $after_title;
+
+			echo '<div class="subscribe_me_services">' . "\n";
+			
+			echo '<div class="' . ( $text ? 'float' : 'center' ) . '_feed_button">'
+				. '<a href="' . htmlspecialchars($feed_url) . '"'
+					. ' title="' . __('RSS feed') . '" class="noicon">'
+				. '<img src="'
+					. htmlspecialchars($icons_url . '/feed-' . ( $text ? 'large' : 'giant' ) . '.gif') . '"'
+					. ( $text
+						? ' height="64" width="64"'
+						: ' height="96" width="96"'
+						)
+					. ' alt="' . __('RSS feed', 'subscribe-me') . '"'
+					. ' />'
+				. '</a>'
+				. '</div>' . "\n";
+			
+			if ( $text ) {
+				echo '<div class"feed_text">' . "\n"
+					. wpautop($text)
+					. '</div>' . "\n";
+			}
+			
+			echo '</div>' . "\n";
+
+			echo '<div class="subscribe_me_spacer subscribe_me_ruler"></div>' . "\n";
+
+			echo '<div class="subscribe_me_extra" style="display: none;">' . "\n";
+
+			foreach ( subscribe_me::get_extra_services() as $service_id =>  $service ) {
+				echo '<a href="' . htmlspecialchars($service['url'])  . '" class="' . $service_id . ' noicon"'
+					. ' title="' . htmlspecialchars($service['name']) . '"'
+					. ( $service_id == 'help' && ( strpos(get_option('home'), 'semiologic.com') !== false )
+						? ''
+						: ' rel="nofollow"'
+						)
+					. '>'
+					. $service['name']
+					. '</a>' . "\n";
 			}
 
-			update_option('subscribe_me_widgets', $o);
+			echo '<div class="subscribe_me_spacer"></div>' . "\n";
+
+			echo '</div>' . "\n";
+		
+			echo $after_widget;
+			
+			$o = ob_get_clean();
+			
+			$o = str_replace(
+				array(
+					'%enc_url%', '%enc_feed%',
+					'%feed%',
+					),
+				array(
+					urlencode($site_url), urlencode($feed_url),
+					htmlspecialchars($feed_url),
+					),
+				$o);
+			
+			wp_cache_add($widget_id, $o, 'widget');
 		}
+		
+		echo $o;
+	} # widget()
+	
+	
+	/**
+	 * get_extra_services()
+	 *
+	 * @return array $services
+	 **/
 
+	function get_extra_services() {
+		return array(
+			'rss_feed' => array(
+				'name' => __('Desktop Reader', 'subscribe-me'),
+				'url' => 'feed:%feed%',
+				),
+			'bloglines' => array(
+				'name' => __('Bloglines', 'subscribe-me'),
+				'url' => 'http://www.bloglines.com/sub/%feed%',
+				),
+			'google' => array(
+				'name' => __('Google', 'subscribe-me'),
+				'url' => 'http://fusion.google.com/add?feedurl=%enc_feed%',
+				),
+			'live' => array(
+				'name' => __('Live', 'subscribe-me'),
+				'url' => 'http://www.live.com/?add=%enc_url%',
+				),
+			'netvibes' => array(
+				'name' => __('Netvibes', 'subscribe-me'),
+				'url' => 'http://www.netvibes.com/subscribe.php?url=%enc_feed%',
+				),
+			'newsgator' => array(
+				'name' => 'Newsgator',
+				'button' => 'addnewsgator.gif',
+				'url' => 'http://www.newsgator.com/ngs/subscriber/subext.aspx?url=%enc_feed%',
+				),
+			'yahoo' => array(
+				'name' => __('MyYahoo!', 'subscribe-me'),
+				'url' => 'http://add.my.yahoo.com/rss?url=%enc_feed%',
+				),
+			'help' => array(
+				'name' => __('What\'s This?', 'subscribe-me'),
+				'url' => 'http://www.semiologic.com/resources/blogging/help-with-feeds/'
+				),
+			);
+	} # get_extra_services()
+	
+	
+	/**
+	 * get_options()
+	 *
+	 * @return array $options
+	 **/
+	
+	function get_options() {
+		static $o;
+		
+		if ( isset($o) && !is_admin() )
+			return $o;
+		
+		$o = get_option('subscribe_me');
+		
+		if ( $o === false ) {
+			$o = subscribe_me::init_options();
+		}
+		
 		return $o;
 	} # get_options()
 	
 	
-	#
-	# new_widget()
-	#
-	
-	function new_widget()
-	{
-		$o = subscribe_me::get_options();
-		$k = time();
-		while ( isset($o[$k]) ) $k++;
-		$o[$k] = subscribe_me::default_options();
+	/**
+	 * init_options()
+	 *
+	 * @return array $options
+	 **/
+
+	function init_options() {
+		if ( ( $o = get_option('subscribe_me_widgets') ) !== false ) {
+			foreach ( $o as $k => $opt ) {
+				if ( is_numeric($k) ) {
+					$o[$k] = array('title' => $opt['title'], 'text' => '');
+				}
+			}
+		} elseif ( ( $o = get_option('sem_subscribe_me_params') ) !== false ) {
+			unset($o['before_widget']);
+			unset($o['after_widget']);
+			unset($o['before_title']);
+			unset($o['after_title']);
+			
+			$o = array( 1 => $o );
+
+			foreach ( array_keys( $sidebars = get_option('sidebars_widgets') ) as $k ) {
+				if ( !is_array($sidebars[$k]) ) {
+					continue;
+				}
+
+				if ( ( $key = array_search('subscribe-me', $sidebars[$k]) ) !== false ) {
+					$sidebars[$k][$key] = 'subscribe_me-1';
+					update_option('sidebars_widgets', $sidebars);
+					break;
+				} elseif ( ( $key = array_search('Subscribe Me', $sidebars[$k]) ) !== false ) {
+					$sidebars[$k][$key] = 'subscribe_me-1';
+					update_option('sidebars_widgets', $sidebars);
+					break;
+				}
+			}
+		} else {
+			$o = array();
+		}
 		
-		update_option('subscribe_me_widgets', $o);
+		delete_option('sem_subscribe_me_services');
+		delete_option('sem_subscribe_me_params');
+		delete_option('subscribe_me_widgets');
+		
+		update_option('subscribe_me', $o);
+		
+		return $o;
+	} # init_options()
+	
+	
+	/**
+	 * default_options()
+	 *
+	 * @return array $widget_options
+	 **/
+
+	function default_options() {
+		return array(
+			'title' => __('Syndicate', 'subscribe-me'),
+			);
+	} # default_options()
+	
+	
+	/**
+	 * new_widget()
+	 *
+	 * @param int $k arbitrary widget number
+	 * @return string $widget_id
+	 **/
+
+	function new_widget($k = null) {
+		$o = subscribe_me::get_options();
+		
+		if ( !( isset($k) && isset($o[$k]) ) ) {
+			$k = time();
+			while ( isset($o[$k]) ) $k++;
+			$o[$k] = subscribe_me::default_options();
+			
+			update_option('subscribe_me', $o);
+		}
 		
 		return 'subscribe_me-' . $k;
 	} # new_widget()
+	
+	
+	/**
+	 * clear_cache()
+	 *
+	 * @return void
+	 **/
 
-
-	#
-	# default_options()
-	#
-
-	function default_options()
-	{
-		return array(
-			'title' => __('Syndicate'),
-			'dropdown' => false,
-			'add_nofollow' => false,
-			'services' => array(
-				'local_feed',
-				'bloglines',
-				'help_link'
-				),
-			);
-	} # default_options()
-
-
-	#
-	# clear_cache()
-	#
-
-	function clear_cache($in = null)
-	{
-		update_option('subscribe_me_cache', array());
+	function clear_cache($in = null) {
+		$o = subscribe_me::get_options();
+		
+		if ( !$o ) return $in;
+		
+		foreach ( array_keys($o) as $widget_id ) {
+			wp_cache_delete($widget_id, 'widget');
+		}
 		
 		return $in;
 	} # clear_cache()
 } # subscribe_me
 
-subscribe_me::init();
 
+/**
+ * the_subscribe_links()
+ *
+ * @return void
+ **/
 
-#
-# the_subscribe_links()
-#
-
-function the_subscribe_links()
-{
-	echo 'Obsolete call to the_subscribe_links() detected';
+function the_subscribe_links($args = null, $text = '') {
+	if ( is_string($args) ) {
+		$args = array('title' => $args, 'text' => $text);
+	}
+	
+	$defaults = array(
+		'before_widget' => '<div class="subscribe_me">' . "\n",
+		'after_widget' => '</div>' . "\n",
+		'before_title' => '<h2>',
+		'after_title' => '</h2>' . "\n",
+		'title' => '',
+		'text' => $text,
+		);
+	
+	$args = array_merge($args, $defaults);
+	
+	subscribe_me::widget($args);
 } # the_subscribe_links()
 
 
-if ( is_admin() )
-{
+/**
+ * subscribe_me_admin()
+ *
+ * @return void
+ **/
+
+function subscribe_me_admin() {
 	include dirname(__FILE__) . '/sem-subscribe-me-admin.php';
-}
+} # subscribe_me_admin()
+
+add_action('load-widgets.php', 'subscribe_me_admin');
 ?>

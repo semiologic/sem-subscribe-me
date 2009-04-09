@@ -39,23 +39,22 @@ class subscribe_me_admin
 					if ( !in_array( "subscribe_me-$widget_number", $_POST['widget-id'] ) ) // the widget has been removed.
 						unset($options[$widget_number]);
 				
-					subscribe_me::clear_cache();
+					wp_cache_delete($_widget_id, 'widget');
 				}
 			}
 
 			foreach ( (array) $_POST['widget-subscribe-me'] as $num => $opt ) {
-				$title = stripslashes(wp_filter_post_kses(strip_tags($opt['title'])));
-				$dropdown = isset($opt['dropdown']);
-				$add_nofollow = isset($opt['add_nofollow']);
+				$title = strip_tags(stripslashes($opt['title']));
+				$text = stripslashes($opt['text']);
 				
-				$services = (array) $opt['services'];
-				$services = array_map('strip_tags', $services);
-				$services = array_map('stripslashes', $services);
+				if ( !current_user_can('unfiltered_html') ) {
+					$text = stripslashes(wp_filter_post_kses($text));
+				}
 				
-				$options[$num] = compact( 'title', 'dropdown', 'add_nofollow', 'services' );
+				$options[$num] = compact('title', 'text');
 			}
 			
-			update_option('subscribe_me_widgets', $options);
+			update_option('subscribe_me', $options);
 			$updated = true;
 		}
 
@@ -73,7 +72,7 @@ class subscribe_me_admin
 		
 		
 		$title = attribute_escape($title);
-
+		$text = format_to_edit($text);
 
 		echo '<input type="hidden"'
 				. ' id="sem_subscribe_me_widget_update"'
@@ -84,117 +83,22 @@ class subscribe_me_admin
 			. '<label>'
 				. __('Title:')
 				. '&nbsp;'
-				. '<input style="width: 250px;"'
+				. '<input class="widefat"'
 					. ' name="widget-subscribe-me[' . $number. '][title]"'
 					. ' type="text" value="' . $title . '" />'
 				. '</label>'
 				. '</div>'
 			. '<div style="margin-bottom: .2em;">'
 			. '<label>'
-				. '<input'
-					. ' name="widget-subscribe-me[' . $number. '][dropdown]"'
-					. ( intval($dropdown)
-						? ' checked="checked"'
-						: ''
-						)
-					. ' type="checkbox" value="1" />'
-				. '&nbsp;'
-				. __('Show as a drop down button')
-				. '</label>'
-				. '</div>'
-			. '<div style="margin-bottom: .2em;">'
-			. '<label>'
-				. '<input'
-					. ' name="widget-subscribe-me[' . $number. '][add_nofollow]"'
-					. ( intval($add_nofollow)
-						? ' checked="checked"'
-						: ''
-						)
-					. ' type="checkbox" value="1" />'
-				. '&nbsp;'
-				. __('Add nofollow')
+				. __('Text:') . '<br />'
+				. '<textarea class="widefat" cols="20" rows="6"'
+					. ' name="widget-subscribe-me[' . $number. '][text]"'
+					. ' >'
+					. $text
+				. '</textarea>'
 				. '</label>'
 				. '</div>'
 			;
-
-
-		$args['site_path'] = trailingslashit(site_url());
-		$args['img_path'] = trailingslashit(site_url()) . 'wp-content/plugins/sem-subscribe-me/img/';
-
-		$o .= '<div style="width: 280px;">';
-
-		foreach ( array_keys((array) subscribe_me::get_services()) as $service )
-		{
-			$details = subscribe_me::get_service($service);
-
-			if ( $details )
-			{
-				switch( $service )
-				{
-				case 'local_feed':
-				case 'help_link':
-					$o .= '<div class="subscribe_service"'
-						. ' style="float: left;'
-							. ' margin: 2px 5px;'
-							. ' width: 130px; height: 20px;'
-							. '"'
-						. '>'
-						. '<label>'
-						. '<input type="checkbox"'
-							. ' name="widget-subscribe-me[' . $number. '][services][]"'
-							. ' value="' . $service . '"'
-							. ( in_array($service, (array) $services)
-								? ' checked="checked"'
-								: ''
-								)
-							. ' />'
-						. '&nbsp;'
-						. '<span style="background: url('
-								. $args['img_path'] . $details['button']
-								. ')'
-								. ' center left no-repeat;'
-								. ' padding-left: 18px;'
-								. ' color: blue;'
-								. ' text-decoration: underline;'
-								. '"'
-								. '>'
-						. $details['name']
-						. '</span>'
-						. '</label>'
-						. '</div>' . "\n";
-					break;
-
-				default:
-					$o .= '<div class="subscribe_service"'
-						. ' style="float: left;'
-							. ' margin: 2px 5px;'
-							. ' width: 130px; height: 20px;'
-							. '"'
-						. '>'
-						. '<label>'
-						. '<input type="checkbox"'
-							. ' name="widget-subscribe-me[' . $number. '][services][]"'
-							. ' value="' . $service . '"'
-							. ( in_array($service, (array) $services)
-								? ' checked="checked"'
-								: ''
-								)
-							. ' />'
-						. '&nbsp;'
-						. '<img'
-							. ' src="' . $args['img_path'] . $details['button'] . '"'
-							. ' alt="' . str_replace('%feed%', $details['name'], __('Subscribe to %feed%')) . '"'
-							. ' align="middle"'
-							. ' />'
-						. '</label>'
-						. '</div>' . "\n";
-					break;
-				}
-			}
-		}
-
-		$o .= '<div style="clear: both;"></div>'
-			. '</div>'. "\n";
 
 		echo $o;
 	} # end widget_control()
