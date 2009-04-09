@@ -39,7 +39,7 @@ jQuery(document).ready(function() {
 							
 							t.data('doFadeOut', token);
 							
-							t.fadeIn('fast');
+							t.fadeIn('normal');
 						}
 					}, 150);
 				});
