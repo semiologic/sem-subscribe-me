@@ -353,7 +353,7 @@ class subscribe_me {
 
 	function default_options() {
 		return array(
-			'title' => __('Syndicate', 'subscribe-me'),
+			'title' => '',
 			);
 	} # default_options()
 	
