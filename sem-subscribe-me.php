@@ -57,8 +57,8 @@ class subscribe_me {
 	 **/
 
 	function js() {
-		$folder = plugins_url() . '/' . basename(dirname(__FILE__));
-		wp_enqueue_script('subscribe_me', $folder . '/js/scripts.js', array('jquery'), '5.0');
+		$folder = plugin_dir_url(__FILE__);
+		wp_enqueue_script('subscribe_me', $folder . 'js/scripts.js', array('jquery'), '5.0');
 	} # js()
 	
 	
@@ -69,8 +69,8 @@ class subscribe_me {
 	 **/
 
 	function css() {
-		$folder = plugins_url() . '/' . basename(dirname(__FILE__));
-		wp_enqueue_style('subscribe_me', $folder . '/css/styles.css', false, '5.0');
+		$folder = plugin_dir_url(__FILE__);
+		wp_enqueue_style('subscribe_me', $folder . 'css/styles.css', false, '5.0');
 	} # css()
 	
 	
@@ -153,7 +153,7 @@ class subscribe_me {
 			
 			$site_url = user_trailingslashit(site_url());
 			$feed_url = user_trailingslashit(apply_filters('bloginfo', get_feed_link('rss2'), 'rss2_url'));
-			$icons_url = plugins_url() . '/' . basename(dirname(__FILE__)) . '/icons';
+			$icons_url = plugin_dir_url(__FILE__) . 'icons';
 
 			ob_start();
 			
