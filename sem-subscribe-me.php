@@ -170,8 +170,8 @@ class subscribe_me {
 				. '<img src="'
 					. htmlspecialchars($icons_url . '/feed-' . ( $text ? 'large' : 'giant' ) . '.gif') . '"'
 					. ( $text
-						? ' height="64" width="64"'
-						: ' height="96" width="96"'
+						? ' height="56" width="56"'
+						: ' height="80" width="80"'
 						)
 					. ' alt="' . __('RSS feed', 'subscribe-me') . '"'
 					. ' />'
@@ -416,7 +416,7 @@ function the_subscribe_links($args = null, $text = '') {
 		'after_widget' => '</div>' . "\n",
 		'before_title' => '<h2>',
 		'after_title' => '</h2>' . "\n",
-		'title' => '',
+		'title' => __('Syndicate', 'subscribe-me'),
 		'text' => $text,
 		);
 	

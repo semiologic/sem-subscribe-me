@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.0\n"
 "Report-Msgid-Bugs-To: https://tickets.semiologic.com\n"
-"POT-Creation-Date: 2009-04-10 12:30+0200\n"
+"POT-Creation-Date: 2009-04-12 17:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,4 +63,8 @@ msgstr ""
 
 #: sem-subscribe-me.php:269
 msgid "What's This?"
+msgstr ""
+
+#: sem-subscribe-me.php:419
+msgid "Syndicate"
 msgstr ""
