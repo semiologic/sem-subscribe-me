@@ -30,7 +30,7 @@ jQuery(document).ready(function() {
 							t.css('left', '');
 							
 							if ( r.offset().top - w.scrollTop() + t.height() > w.height() ) {
-								t.css('top', p.children("div.subscribe_me_services").offset().top - t.height() - 2);
+								t.css('top', p.children("div.subscribe_me_services").offset().top - t.height() - 12);
 							}
 					
 							if ( t.width() > r.width() && r.offset().left > d.width() / 2 ) {
