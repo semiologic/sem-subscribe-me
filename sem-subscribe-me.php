@@ -170,7 +170,7 @@ class subscribe_me {
 				. '<img src="'
 					. htmlspecialchars($icons_url . '/feed-' . ( $text ? 'large' : 'giant' ) . '.gif') . '"'
 					. ( $text
-						? ' height="56" width="56"'
+						? ' height="48" width="48"'
 						: ' height="80" width="80"'
 						)
 					. ' alt="' . __('RSS feed', 'subscribe-me') . '"'
@@ -353,7 +353,8 @@ class subscribe_me {
 
 	function default_options() {
 		return array(
-			'title' => '',
+			'title' => __('Syndicate', 'subscribe-me'),
+			'text' => __('Subscribe to this site\'s RSS feed.', 'subscribe-me'),
 			);
 	} # default_options()
 	
