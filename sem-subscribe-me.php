@@ -179,7 +179,7 @@ class subscribe_me {
 				. '</div>' . "\n";
 			
 			if ( $text ) {
-				echo '<div class"feed_text">' . "\n"
+				echo '<div class="feed_text">' . "\n"
 					. wpautop($text)
 					. '</div>' . "\n";
 			}
