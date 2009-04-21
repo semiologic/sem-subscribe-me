@@ -33,8 +33,11 @@ Other icons are copyright their respective holders.
  **/
 
 add_action('widgets_init', array('subscribe_me', 'widgetize'));
-add_action('wp_print_scripts', array('subscribe_me', 'js'));
-add_action('wp_print_styles', array('subscribe_me', 'css'));
+
+if ( !is_admin() ) {
+	add_action('wp_print_scripts', array('subscribe_me', 'js'));
+	add_action('wp_print_styles', array('subscribe_me', 'css'));
+}
 
 foreach ( array(
 		'generate_rewrite_rules',
