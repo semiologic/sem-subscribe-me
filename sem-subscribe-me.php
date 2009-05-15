@@ -26,7 +26,7 @@ Other icons are copyright their respective holders.
 **/
 
 
-load_plugin_textdomain('subscribe-me', null, plugin_dir_path(__FILE__) . '/lang');
+load_plugin_textdomain('subscribe-me', null, dirname(__FILE__) . '/lang');
 
 
 /**
