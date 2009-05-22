@@ -71,7 +71,7 @@ class subscribe_me_admin
 		extract($ops);
 		
 		
-		$title = attribute_escape($title);
+		$title = esc_attr($title);
 		$text = format_to_edit($text);
 
 		echo '<input type="hidden"'
