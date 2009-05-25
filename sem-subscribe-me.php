@@ -78,7 +78,7 @@ class subscribe_me {
 
 	function css() {
 		$folder = plugin_dir_url(__FILE__);
-		wp_enqueue_style('subscribe_me', $folder . 'css/styles.css', false, '5.0');
+		wp_enqueue_style('subscribe_me', $folder . 'css/styles.css', null, '5.0');
 	} # css()
 	
 	
@@ -174,7 +174,7 @@ class subscribe_me {
 			
 			echo '<div class="' . ( $text ? 'float' : 'center' ) . '_feed_button">'
 				. '<a href="' . htmlspecialchars($feed_url) . '"'
-					. ' title="' . __('RSS feed') . '" class="noicon">'
+					. ' title="' . __('RSS feed') . '" class="no_icon">'
 				. '<img src="'
 					. htmlspecialchars($icons_url . '/feed-' . ( $text ? 'large' : 'giant' ) . '.gif') . '"'
 					. ( $text
@@ -199,7 +199,7 @@ class subscribe_me {
 			echo '<div class="subscribe_me_extra" style="display: none;">' . "\n";
 
 			foreach ( subscribe_me::get_extra_services() as $service_id =>  $service ) {
-				echo '<a href="' . htmlspecialchars($service['url'])  . '" class="' . $service_id . ' noicon"'
+				echo '<a href="' . htmlspecialchars($service['url'])  . '" class="' . $service_id . ' no_icon"'
 					. ' title="' . htmlspecialchars($service['name']) . '"'
 					. ( $service_id == 'help' && ( strpos(get_option('home'), 'semiologic.com') !== false )
 						? ''
