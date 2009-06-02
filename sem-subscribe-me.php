@@ -137,9 +137,6 @@ class subscribe_me {
 		extract($args, EXTR_SKIP);
 		
 		if ( is_admin() ) {
-			echo $before_widget
-				. $before_title . $title . $after_title
-				. $after_widget;
 			return;
 		}
 		
