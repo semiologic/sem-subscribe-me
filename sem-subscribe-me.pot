@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.0\n"
 "Report-Msgid-Bugs-To: https://tickets.semiologic.com\n"
-"POT-Creation-Date: 2009-04-14 11:24+0200\n"
+"POT-Creation-Date: 2009-06-04 18:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,59 +16,62 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: sem-subscribe-me-admin.php:84
-msgid "Title:"
+#: sem-subscribe-me.php:107
+msgid "Subscribe links to RSS readers such as Google Reader"
 msgstr ""
 
-#: sem-subscribe-me-admin.php:93
-msgid "Text:"
-msgstr ""
-
-#: sem-subscribe-me.php:86
-msgid "Feed subscription buttons for your site"
-msgstr ""
-
-#: sem-subscribe-me.php:95 sem-subscribe-me.php:96 sem-subscribe-me.php:102
-#: sem-subscribe-me.php:103
+#: sem-subscribe-me.php:113
 msgid "Subscribe Me"
 msgstr ""
 
-#: sem-subscribe-me.php:169 sem-subscribe-me.php:176
+#: sem-subscribe-me.php:168
+msgid "RSS Feed"
+msgstr ""
+
+#: sem-subscribe-me.php:175
 msgid "RSS feed"
 msgstr ""
 
-#: sem-subscribe-me.php:240
+#: sem-subscribe-me.php:238
 msgid "Desktop Reader"
 msgstr ""
 
-#: sem-subscribe-me.php:244
+#: sem-subscribe-me.php:242
 msgid "Bloglines"
 msgstr ""
 
-#: sem-subscribe-me.php:248
+#: sem-subscribe-me.php:246
 msgid "Google"
 msgstr ""
 
-#: sem-subscribe-me.php:252
+#: sem-subscribe-me.php:250
 msgid "Live"
 msgstr ""
 
-#: sem-subscribe-me.php:256
+#: sem-subscribe-me.php:254
 msgid "Netvibes"
 msgstr ""
 
-#: sem-subscribe-me.php:265
+#: sem-subscribe-me.php:263
 msgid "Yahoo!"
 msgstr ""
 
-#: sem-subscribe-me.php:269
+#: sem-subscribe-me.php:267
 msgid "What's This?"
 msgstr ""
 
-#: sem-subscribe-me.php:356 sem-subscribe-me.php:420
+#: sem-subscribe-me.php:308
+msgid "Title:"
+msgstr ""
+
+#: sem-subscribe-me.php:318
+msgid "Text:"
+msgstr ""
+
+#: sem-subscribe-me.php:338
 msgid "Syndicate"
 msgstr ""
 
-#: sem-subscribe-me.php:357
+#: sem-subscribe-me.php:339
 msgid "Subscribe to this site's RSS feed."
 msgstr ""
