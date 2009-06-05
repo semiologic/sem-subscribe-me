@@ -18,7 +18,7 @@
 	float: left;
 	background-repeat: no-repeat;
 	white-space: nowrap;
-	width: 139px;
+	width: 144px;
 	line-height: 20px !important;
 	height: 20px !important;
 	overflow: hidden;
@@ -44,8 +44,8 @@
 	color: #000;
 	border: solid 1px #999;
 	padding: 5px 5px;
-	margin-left: -6px;
-	width: 350px;
+	margin-left: -1px;
+	width: 360px;
 	-moz-border-radius: 10px;
 	-khtml-border-radius: 10px;
 	-webkit-border-radius: 10px;
