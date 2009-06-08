@@ -178,7 +178,7 @@ class subscribe_me extends WP_Widget {
 			. '</div>' . "\n";
 		
 		if ( $text ) {
-			echo '<div class="feed_text">' . "\n"
+			echo '<div class="subscribe_me_text">' . "\n"
 				. apply_filters('widget_text', wpautop($text))
 				. '</div>' . "\n";
 		}
