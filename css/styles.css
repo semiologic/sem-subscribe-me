@@ -83,3 +83,12 @@
 .subscribe_me .yahoo {
 	background-position: 0px -140px;
 }
+
+.subscribe_me .media_container {
+	clear: none;
+}
+
+.subscribe_me .media {
+	text-align: left;
+	margin-left: 0px;
+}
