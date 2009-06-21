@@ -123,12 +123,22 @@ class subscribe_me extends WP_Widget {
 	 **/
 
 	function widget($args, $instance) {
-		if ( is_admin() || is_feed() || isset($_GET['action']) && $_GET['action'] == 'print' )
+		if ( is_feed() || isset($_GET['action']) && $_GET['action'] == 'print' )
 			return;
 		
 		extract($args, EXTR_SKIP);
 		$instance = wp_parse_args($instance, subscribe_me::defaults());
 		extract($instance, EXTR_SKIP);
+		
+		if ( is_admin() ) {
+			echo $before_widget
+				. ( $title
+					? ( $before_title . $title . $after_title )
+					: ''
+					)
+				. $after_widget;
+			return;
+		}
 		
 		if ( $o = wp_cache_get($widget_id, 'widget') ) {
 			echo $o;
