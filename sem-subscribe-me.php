@@ -6,7 +6,7 @@ Description: Widgets that let you display subscribe links to RSS readers such as
 Version: 5.0 RC
 Author: Denis de Bernardy
 Author URI: http://www.getsemiologic.com
-Text Domain: subscribe-me-info
+Text Domain: subscribe-me
 Domain Path: /lang
 */
 
