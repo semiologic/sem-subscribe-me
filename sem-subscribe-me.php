@@ -160,7 +160,7 @@ class subscribe_me extends WP_Widget {
 			}
 		}
 		
-		$site_url = user_trailingslashit(site_url());
+		$site_url = user_trailingslashit(get_option('home'));
 		$feed_url = user_trailingslashit(apply_filters('bloginfo', get_feed_link('rss2'), 'rss2_url'));
 		$icons_url = plugin_dir_url(__FILE__) . 'icons';
 
