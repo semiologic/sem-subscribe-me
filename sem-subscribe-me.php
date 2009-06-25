@@ -110,6 +110,20 @@ class subscribe_me extends WP_Widget {
 			'width' => 330,
 			);
 		
+		if ( get_option('widget_subscribe_me') === false ) {
+			foreach ( array(
+				'subscribe_me' => 'upgrade',
+				'subscribe_me_widgets' => 'upgrade',
+				'sem_subscribe_me_params' => 'upgrade_2_x',
+				) as $ops => $method ) {
+				if ( get_option($ops) !== false ) {
+					$this->alt_option_name = $ops;
+					add_filter('option_' . $ops, array('subscribe_me', $method));
+					break;
+				}
+			}
+		}
+		
 		$this->WP_Widget('subscribe_me', __('Subscribe Me', 'subscribe-me'), $widget_ops, $control_ops);
 	} # subscribe_me()
 	
@@ -372,6 +386,49 @@ class subscribe_me extends WP_Widget {
 		
 		return $in;
 	} # flush_cache()
+	
+	
+	/**
+	 * upgrade()
+	 *
+	 * @param array $ops
+	 * @return array $ops
+	 **/
+
+	function upgrade($ops) {
+		$widget_contexts = class_exists('widget_contexts')
+			? get_option('widget_contexts')
+			: false;
+
+		foreach ( $ops as $k => $o ) {
+			$ops[$k] = array(
+				'title' => $o['title'],
+				);
+			if ( isset($widget_contexts['subscribe_me-' . $k]) ) {
+				$ops[$k]['widget_contexts'] = $widget_contexts['subscribe_me-' . $k];
+				unset($widget_contexts['subscribe_me-' . $k]);
+			}
+		}
+		
+		if ( !defined('sem_install_test') )
+			update_option('widget_subscribe_me', $ops);
+		
+		return $ops;
+	} # upgrade()
+	
+	
+	/**
+	 * upgrade_2_x()
+	 *
+	 * @param array $ops
+	 * @return array $ops
+	 **/
+
+	function upgrade_2_x($ops) {
+		$ops = subscribe_me::upgrade($ops);
+		dump($ops);
+		return $ops;
+	} # upgrade_2_x()
 } # subscribe_me
 
 
