@@ -411,6 +411,8 @@ class subscribe_me extends WP_Widget {
 		}
 		
 		update_option('widget_subscribe_me', $ops);
+		if ( $widget_contexts !== false )
+			update_option('widget_contexts', $widget_contexts);
 		
 		return $ops;
 	} # upgrade()
