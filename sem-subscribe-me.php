@@ -410,8 +410,7 @@ class subscribe_me extends WP_Widget {
 			}
 		}
 		
-		if ( !defined('sem_install_test') )
-			update_option('widget_subscribe_me', $ops);
+		update_option('widget_subscribe_me', $ops);
 		
 		return $ops;
 	} # upgrade()
