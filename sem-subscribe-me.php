@@ -57,7 +57,27 @@ register_activation_hook(__FILE__, array('subscribe_me', 'flush_cache'));
 register_deactivation_hook(__FILE__, array('subscribe_me', 'flush_cache'));
 
 class subscribe_me extends WP_Widget {
-	var $option_name = 'subscribe_me';
+	/**
+	 * init()
+	 *
+	 * @return void
+	 **/
+
+	function init() {
+		if ( get_option('widget_subscribe_me') === false ) {
+			foreach ( array(
+				'subscribe_me' => 'upgrade',
+				'subscribe_me_widgets' => 'upgrade',
+				'sem_subscribe_me_params' => 'upgrade_2_x',
+				) as $ops => $method ) {
+				if ( get_option($ops) !== false ) {
+					$this->alt_option_name = $ops;
+					add_filter('option_' . $ops, array(get_class($this), $method));
+					break;
+				}
+			}
+		}
+	} # init()
 	
 	
 	/**
@@ -110,20 +130,7 @@ class subscribe_me extends WP_Widget {
 			'width' => 330,
 			);
 		
-		if ( get_option('widget_subscribe_me') === false ) {
-			foreach ( array(
-				'subscribe_me' => 'upgrade',
-				'subscribe_me_widgets' => 'upgrade',
-				'sem_subscribe_me_params' => 'upgrade_2_x',
-				) as $ops => $method ) {
-				if ( get_option($ops) !== false ) {
-					$this->alt_option_name = $ops;
-					add_filter('option_' . $ops, array('subscribe_me', $method));
-					break;
-				}
-			}
-		}
-		
+		$this->init();
 		$this->WP_Widget('subscribe_me', __('Subscribe Me', 'subscribe-me'), $widget_ops, $control_ops);
 	} # subscribe_me()
 	
@@ -410,10 +417,6 @@ class subscribe_me extends WP_Widget {
 			}
 		}
 		
-		update_option('widget_subscribe_me', $ops);
-		if ( $widget_contexts !== false )
-			update_option('widget_contexts', $widget_contexts);
-		
 		return $ops;
 	} # upgrade()
 	
@@ -422,13 +425,11 @@ class subscribe_me extends WP_Widget {
 	 * upgrade_2_x()
 	 *
 	 * @param array $ops
-	 * @return array $ops
+	 * @return void
 	 **/
 
 	function upgrade_2_x($ops) {
-		$ops = subscribe_me::upgrade($ops);
-		dump($ops);
-		return $ops;
+		#$ops = subscribe_me::upgrade($ops);
 	} # upgrade_2_x()
 } # subscribe_me
 
