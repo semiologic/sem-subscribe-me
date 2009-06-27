@@ -413,7 +413,6 @@ class subscribe_me extends WP_Widget {
 				);
 			if ( isset($widget_contexts['subscribe_me-' . $k]) ) {
 				$ops[$k]['widget_contexts'] = $widget_contexts['subscribe_me-' . $k];
-				unset($widget_contexts['subscribe_me-' . $k]);
 			}
 		}
 		
