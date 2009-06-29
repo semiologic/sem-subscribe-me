@@ -184,13 +184,15 @@ class subscribe_me extends WP_Widget {
 		$site_url = user_trailingslashit(get_option('home'));
 		$feed_url = user_trailingslashit(apply_filters('bloginfo', get_feed_link('rss2'), 'rss2_url'));
 		$icons_url = plugin_dir_url(__FILE__) . 'icons';
-
+		
+		$title = apply_filters('widget_title', $title);
+		
 		ob_start();
 		
 		echo $before_widget;
 		
 		if ( $title )
-			echo $before_title . apply_filters('widget_title', $title) . $after_title;
+			echo $before_title . $title . $after_title;
 
 		echo '<div class="subscribe_me_services">' . "\n";
 		
