@@ -447,6 +447,7 @@ class subscribe_me extends WP_Widget {
 		foreach ( $sidebars_widgets as $sidebar => $widgets ) {
 			if ( !is_array($widgets) )
 				continue;
+			$widgets = array_map('sanitize_title', $widgets);
 			$key = array_search('subscribe-me', $widgets);
 			if ( $key !== false ) {
 				$sidebars_widgets[$sidebar][$key] = 'subscribe_me';
