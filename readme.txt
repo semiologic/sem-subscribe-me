@@ -3,15 +3,22 @@ Contributors: Denis-de-Bernardy
 Donate link: http://buy.semiologic.com/drink
 Tags: subscribe-me, feed, rss, atom, subscribe-button, subscribe, semiologic
 Requires at least: 2.8
-Tested up to: 2.8
+Tested up to: 2.8.1
 Stable tag: trunk
 
-Short Intro
+Adds widgets that let you display subscribe links to RSS readers such as Google Reader.
 
 
 == Description ==
 
+Adds widgets that let you display subscribe links to RSS readers such as Google Reader.
 
+
+= Help Me! =
+
+The [Semiologic forum](http://forum.semiologic.com) is the best place to report issues. Please note, however, that while community members and I do our best to answer all queries, we're assisting you on a voluntary basis.
+
+If you require more dedicated assistance, consider using [Semiologic Pro](http://www.getsemiologic.com).
 
 == Installation ==
 
@@ -19,10 +26,14 @@ Short Intro
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 
-== Frequently Asked Questions ==
+== Change Log ==
 
-= Help Me! =
+= 5.0 =
 
-The [Semiologic forum](http://forum.semiologic.com) is the best place to report issues. Please note, however, that while community members and I do our best to answer all queries, we're assisting you on a voluntary basis.
-
-If you require more dedicated assistance, consider using [Semiologic Pro](http://www.getsemiologic.com).
+- Complete rewrite
+- WP_Widget class
+- Drop all options except title (nofollow is always enabled)
+- Smaller, better list of services
+- Use jQuery, insert script in footer
+- Localization
+- Code enhancements and optimizations
