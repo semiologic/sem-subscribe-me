@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.0\n"
 "Report-Msgid-Bugs-To: https://tickets.semiologic.com\n"
-"POT-Creation-Date: 2009-07-07 23:06+0200\n"
+"POT-Creation-Date: 2009-07-09 17:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,12 +16,18 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: sem-subscribe-me.php:130
-msgid "Subscribe links to RSS readers such as Google Reader"
+#: sem-subscribe-me-info.php:2 sem-subscribe-me.php:137
+msgid "Subscribe Me"
 msgstr ""
 
-#: sem-subscribe-me.php:137
-msgid "Subscribe Me"
+#: sem-subscribe-me-info.php:3
+msgid ""
+"Widgets that let you display subscribe links to RSS readers such as Google "
+"Reader."
+msgstr ""
+
+#: sem-subscribe-me.php:130
+msgid "Subscribe links to RSS readers such as Google Reader"
 msgstr ""
 
 #: sem-subscribe-me.php:204

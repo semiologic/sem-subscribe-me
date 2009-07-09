@@ -11,14 +11,22 @@ Adds widgets that let you display subscribe links to RSS readers such as Google 
 
 == Description ==
 
-Adds widgets that let you display subscribe links to RSS readers such as Google Reader.
+The Subscribe Me plugin will add buttons that let your visitors share your content on [social media sites](http://www.semiologic.com/resources/blogging/help-with-feeds/) such as Bloglines or Google Reader.
 
+Hovering the big RSS buttons will reveal the subscription services. Only major services are included, alongside a Desktop subscription link for those who have the relevant software.
+
+Users of themes that do not support widgets will need to add the following call in their template:
+
+    <php the_subscribe_links(); ?>
+
+The call accepts an optional argument, which sets the widget's title.
 
 = Help Me! =
 
 The [Semiologic forum](http://forum.semiologic.com) is the best place to report issues. Please note, however, that while community members and I do our best to answer all queries, we're assisting you on a voluntary basis.
 
 If you require more dedicated assistance, consider using [Semiologic Pro](http://www.getsemiologic.com).
+
 
 == Installation ==
 
