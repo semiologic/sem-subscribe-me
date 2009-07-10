@@ -28,7 +28,7 @@ Other icons are copyright their respective holders.
 **/
 
 
-load_plugin_textdomain('subscribe-me', null, dirname(__FILE__) . '/lang');
+load_plugin_textdomain('subscribe-me', false, dirname(plugin_basename(__FILE__)) . '/lang');
 
 
 /**
@@ -51,7 +51,7 @@ foreach ( array(
 		'update_option_sidebars_widgets',
 		
 		'flush_cache',
-		'after_db_upgrade_version',
+		'after_db_upgrade',
 		) as $hook) {
 	add_action($hook, array('subscribe_me', 'flush_cache'));
 }
@@ -127,7 +127,7 @@ class subscribe_me extends WP_Widget {
 	function subscribe_me() {
 		$widget_ops = array(
 			'classname' => 'subscribe_me',
-			'description' => __("Subscribe links to RSS readers such as Google Reader", 'subscribe-me'),
+			'description' => __('Subscribe links to RSS readers such as Google Reader', 'subscribe-me'),
 			);
 		$control_ops = array(
 			'width' => 330,
