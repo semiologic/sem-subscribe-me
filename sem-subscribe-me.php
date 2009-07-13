@@ -6,7 +6,7 @@ Description: Widgets that let you display subscribe links to RSS readers such as
 Version: 5.0 RC2
 Author: Denis de Bernardy
 Author URI: http://www.getsemiologic.com
-Text Domain: subscribe-me
+Text Domain: sem-subscribe-me
 Domain Path: /lang
 */
 
@@ -28,7 +28,7 @@ Other icons are copyright their respective holders.
 **/
 
 
-load_plugin_textdomain('subscribe-me', false, dirname(plugin_basename(__FILE__)) . '/lang');
+load_plugin_textdomain('sem-subscribe-me', false, dirname(plugin_basename(__FILE__)) . '/lang');
 
 
 /**
@@ -127,14 +127,14 @@ class subscribe_me extends WP_Widget {
 	function subscribe_me() {
 		$widget_ops = array(
 			'classname' => 'subscribe_me',
-			'description' => __('Subscribe links to RSS readers such as Google Reader', 'subscribe-me'),
+			'description' => __('Subscribe links to RSS readers such as Google Reader', 'sem-subscribe-me'),
 			);
 		$control_ops = array(
 			'width' => 330,
 			);
 		
 		$this->init();
-		$this->WP_Widget('subscribe_me', __('Subscribe Me', 'subscribe-me'), $widget_ops, $control_ops);
+		$this->WP_Widget('subscribe_me', __('Subscribe Me', 'sem-subscribe-me'), $widget_ops, $control_ops);
 	} # subscribe_me()
 	
 	
@@ -201,14 +201,14 @@ class subscribe_me extends WP_Widget {
 		
 		echo '<div class="' . ( $text ? 'float' : 'center' ) . '_feed_button">'
 			. '<a href="' . esc_url($feed_url) . '"'
-				. ' title="' . esc_attr(__('RSS Feed', 'subscribe-me')) . '" class="no_icon">'
+				. ' title="' . esc_attr(__('RSS Feed', 'sem-subscribe-me')) . '" class="no_icon">'
 			. '<img src="'
 				. esc_url($icons_url . '/feed-' . ( $text ? 'large' : 'giant' ) . '.gif') . '"'
 				. ( $text
 					? ' height="48" width="48"'
 					: ' height="80" width="80"'
 					)
-				. ' alt="' . esc_attr(__('RSS feed', 'subscribe-me')) . '"'
+				. ' alt="' . esc_attr(__('RSS feed', 'sem-subscribe-me')) . '"'
 				. ' />'
 			. '</a>'
 			. '</div>' . "\n";
@@ -271,23 +271,23 @@ class subscribe_me extends WP_Widget {
 	function get_extra_services() {
 		return array(
 			'rss_feed' => array(
-				'name' => __('Desktop Reader', 'subscribe-me'),
+				'name' => __('Desktop Reader', 'sem-subscribe-me'),
 				'url' => 'feed:%feed%',
 				),
 			'bloglines' => array(
-				'name' => __('Bloglines', 'subscribe-me'),
+				'name' => __('Bloglines', 'sem-subscribe-me'),
 				'url' => 'http://www.bloglines.com/sub/%feed%',
 				),
 			'google' => array(
-				'name' => __('Google', 'subscribe-me'),
+				'name' => __('Google', 'sem-subscribe-me'),
 				'url' => 'http://fusion.google.com/add?feedurl=%enc_feed%',
 				),
 			'live' => array(
-				'name' => __('Live', 'subscribe-me'),
+				'name' => __('Live', 'sem-subscribe-me'),
 				'url' => 'http://www.live.com/?add=%enc_url%',
 				),
 			'netvibes' => array(
-				'name' => __('Netvibes', 'subscribe-me'),
+				'name' => __('Netvibes', 'sem-subscribe-me'),
 				'url' => 'http://www.netvibes.com/subscribe.php?url=%enc_feed%',
 				),
 			'newsgator' => array(
@@ -296,11 +296,11 @@ class subscribe_me extends WP_Widget {
 				'url' => 'http://www.newsgator.com/ngs/subscriber/subext.aspx?url=%enc_feed%',
 				),
 			'yahoo' => array(
-				'name' => __('Yahoo!', 'subscribe-me'),
+				'name' => __('Yahoo!', 'sem-subscribe-me'),
 				'url' => 'http://add.my.yahoo.com/rss?url=%enc_feed%',
 				),
 			'help' => array(
-				'name' => __('What\'s This?', 'subscribe-me'),
+				'name' => __('What\'s This?', 'sem-subscribe-me'),
 				'url' => 'http://www.semiologic.com/resources/blogging/help-with-feeds/'
 				),
 			);
@@ -341,7 +341,7 @@ class subscribe_me extends WP_Widget {
 		
 		echo '<p>'
 			. '<label>'
-			. __('Title:', 'subscribe-me')
+			. __('Title:', 'sem-subscribe-me')
 			. '<br />'
 			. '<input type="text" class="widefat"'
 				. ' id="' . $this->get_field_id('title') . '"'
@@ -352,7 +352,7 @@ class subscribe_me extends WP_Widget {
 		
 		echo '<p>'
 			. '<label for="' . $this->get_field_id('text') . '">'
-			. __('Text:', 'subscribe-me')
+			. __('Text:', 'sem-subscribe-me')
 			. '</label>'
 			. '<br />'
 			. '<textarea class="widefat" cols="20" rows="6"'
@@ -372,8 +372,8 @@ class subscribe_me extends WP_Widget {
 
 	function defaults() {
 		return array(
-			'title' => __('Syndicate', 'subscribe-me'),
-			'text' => __('Subscribe to this site\'s RSS feed.', 'subscribe-me'),
+			'title' => __('Syndicate', 'sem-subscribe-me'),
+			'text' => __('Subscribe to this site\'s RSS feed.', 'sem-subscribe-me'),
 			);
 	} # defaults()
 	
