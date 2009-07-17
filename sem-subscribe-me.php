@@ -337,6 +337,7 @@ class subscribe_me extends WP_Widget {
 	 **/
 
 	function form($instance) {
+		$instance = wp_parse_args($instance, subscribe_me::defaults());
 		extract($instance, EXTR_SKIP);
 		
 		echo '<p>'
