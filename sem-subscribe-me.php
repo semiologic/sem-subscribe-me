@@ -91,7 +91,7 @@ class subscribe_me extends WP_Widget {
 
 	function scripts() {
 		$folder = plugin_dir_url(__FILE__);
-		wp_enqueue_script('subscribe_me', $folder . 'js/scripts.js', array('jquery'), '5.0');
+		wp_enqueue_script('subscribe_me', $folder . 'js/scripts.js', array('jquery'), '5.0', true);
 	} # scripts()
 	
 	
