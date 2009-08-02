@@ -37,28 +37,6 @@ load_plugin_textdomain('sem-subscribe-me', false, dirname(plugin_basename(__FILE
  * @package Subscribe Me
  **/
 
-add_action('widgets_init', array('subscribe_me', 'widgets_init'));
-
-if ( !is_admin() ) {
-	add_action('wp_print_scripts', array('subscribe_me', 'scripts'));
-	add_action('wp_print_styles', array('subscribe_me', 'styles'));
-}
-
-foreach ( array(
-		'generate_rewrite_rules',
-		'switch_theme',
-		'update_option_active_plugins',
-		'update_option_sidebars_widgets',
-		
-		'flush_cache',
-		'after_db_upgrade',
-		) as $hook) {
-	add_action($hook, array('subscribe_me', 'flush_cache'));
-}
-
-register_activation_hook(__FILE__, array('subscribe_me', 'flush_cache'));
-register_deactivation_hook(__FILE__, array('subscribe_me', 'flush_cache'));
-
 class subscribe_me extends WP_Widget {
 	/**
 	 * init()
@@ -484,4 +462,27 @@ function the_subscribe_links($instance = null, $args = '') {
 	
 	the_widget('subscribe_me', $instance, $args);
 } # the_subscribe_links()
+
+
+add_action('widgets_init', array('subscribe_me', 'widgets_init'));
+
+if ( !is_admin() ) {
+	add_action('wp_print_scripts', array('subscribe_me', 'scripts'));
+	add_action('wp_print_styles', array('subscribe_me', 'styles'));
+}
+
+foreach ( array(
+		'generate_rewrite_rules',
+		'switch_theme',
+		'update_option_active_plugins',
+		'update_option_sidebars_widgets',
+		
+		'flush_cache',
+		'after_db_upgrade',
+		) as $hook) {
+	add_action($hook, array('subscribe_me', 'flush_cache'));
+}
+
+register_activation_hook(__FILE__, array('subscribe_me', 'flush_cache'));
+register_deactivation_hook(__FILE__, array('subscribe_me', 'flush_cache'));
 ?>
