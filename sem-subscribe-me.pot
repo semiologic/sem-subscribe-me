@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.0\n"
 "Report-Msgid-Bugs-To: https://tickets.semiologic.com\n"
-"POT-Creation-Date: 2009-07-17 11:35+0200\n"
+"POT-Creation-Date: 2009-08-03 18:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: sem-subscribe-me-info.php:2 sem-subscribe-me.php:137
+#: sem-subscribe-me-info.php:2 sem-subscribe-me.php:115
 msgid "Subscribe Me"
 msgstr ""
 
@@ -26,58 +26,58 @@ msgid ""
 "Reader."
 msgstr ""
 
-#: sem-subscribe-me.php:130
+#: sem-subscribe-me.php:108
 msgid "Subscribe links to RSS readers such as Google Reader"
 msgstr ""
 
-#: sem-subscribe-me.php:204
+#: sem-subscribe-me.php:182
 msgid "RSS Feed"
 msgstr ""
 
-#: sem-subscribe-me.php:211
+#: sem-subscribe-me.php:189
 msgid "RSS feed"
 msgstr ""
 
-#: sem-subscribe-me.php:274
+#: sem-subscribe-me.php:252
 msgid "Desktop Reader"
 msgstr ""
 
-#: sem-subscribe-me.php:278
+#: sem-subscribe-me.php:256
 msgid "Bloglines"
 msgstr ""
 
-#: sem-subscribe-me.php:282
+#: sem-subscribe-me.php:260
 msgid "Google"
 msgstr ""
 
-#: sem-subscribe-me.php:286
+#: sem-subscribe-me.php:264
 msgid "Live"
 msgstr ""
 
-#: sem-subscribe-me.php:290
+#: sem-subscribe-me.php:268
 msgid "Netvibes"
 msgstr ""
 
-#: sem-subscribe-me.php:299
+#: sem-subscribe-me.php:277
 msgid "Yahoo!"
 msgstr ""
 
-#: sem-subscribe-me.php:303
+#: sem-subscribe-me.php:281
 msgid "What's This?"
 msgstr ""
 
-#: sem-subscribe-me.php:345
+#: sem-subscribe-me.php:323
 msgid "Title:"
 msgstr ""
 
-#: sem-subscribe-me.php:356
+#: sem-subscribe-me.php:334
 msgid "Text:"
 msgstr ""
 
-#: sem-subscribe-me.php:376
+#: sem-subscribe-me.php:354
 msgid "Syndicate"
 msgstr ""
 
-#: sem-subscribe-me.php:377
+#: sem-subscribe-me.php:355
 msgid "Subscribe to this site's RSS feed."
 msgstr ""
