@@ -339,7 +339,8 @@ class subscribe_me extends WP_Widget {
 				. ' id="' . $this->get_field_id('text') . '"'
 				. ' >'
 				. $text
-			. '</textarea>';
+			. '</textarea>'
+			. '</p>' . "\n";
 	} # form()
 	
 	
