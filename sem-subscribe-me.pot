@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 5.0\n"
 "Report-Msgid-Bugs-To: https://tickets.semiologic.com\n"
-"POT-Creation-Date: 2009-08-03 18:31+0200\n"
+"POT-Creation-Date: 2009-09-06 17:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -74,10 +74,10 @@ msgstr ""
 msgid "Text:"
 msgstr ""
 
-#: sem-subscribe-me.php:354
+#: sem-subscribe-me.php:355
 msgid "Syndicate"
 msgstr ""
 
-#: sem-subscribe-me.php:355
+#: sem-subscribe-me.php:356
 msgid "Subscribe to this site's RSS feed."
 msgstr ""
