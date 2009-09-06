@@ -1,9 +1,9 @@
 === Subscribe Me ===
 Contributors: Denis-de-Bernardy
-Donate link: http://buy.semiologic.com/drink
+Donate link: http://www.semiologic.com/partners/
 Tags: subscribe-me, feed, rss, atom, subscribe-button, subscribe, semiologic
 Requires at least: 2.8
-Tested up to: 2.8.3
+Tested up to: 2.8.4
 Stable tag: trunk
 
 Adds widgets that let you display subscribe links to RSS readers such as Google Reader.
