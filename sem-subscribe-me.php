@@ -365,8 +365,7 @@ class subscribe_me extends WP_Widget {
 	 **/
 
 	function flush_cache($in = null) {
-		$o = get_option('subscribe_me');
-		
+		$o = get_option('widget_subscribe_me');
 		unset($o['_multiwidget']);
 		
 		if ( !$o )

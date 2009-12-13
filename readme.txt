@@ -39,6 +39,7 @@ If you require more dedicated assistance, consider using [Semiologic Pro](http:/
 = 5.0.1 alpha =
 
 - Apply filters to permalinks
+- Fix cache flushing
 
 = 5.0 =
 
