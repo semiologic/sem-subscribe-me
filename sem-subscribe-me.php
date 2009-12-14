@@ -471,10 +471,10 @@ if ( !is_admin() ) {
 }
 
 foreach ( array(
-		'generate_rewrite_rules',
 		'switch_theme',
 		'update_option_active_plugins',
 		'update_option_sidebars_widgets',
+		'generate_rewrite_rules',
 		
 		'flush_cache',
 		'after_db_upgrade',
