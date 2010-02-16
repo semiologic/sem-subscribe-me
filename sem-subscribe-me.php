@@ -3,7 +3,7 @@
 Plugin Name: Subscribe Me
 Plugin URI: http://www.semiologic.com/software/subscribe-me/
 Description: Widgets that let you display subscribe links to RSS readers such as Google Reader.
-Version: 5.0.1
+Version: 5.0.2 RC
 Author: Denis de Bernardy
 Author URI: http://www.getsemiologic.com
 Text Domain: sem-subscribe-me
@@ -153,7 +153,7 @@ class subscribe_me extends WP_Widget {
 				if ( preg_match("/\bclass\s*=\s*(\"|')(.*?)\\1/", $tag[0], $class) ) {
 					$tag[1] = str_replace($class[2], $class[2] . ' subscribe_me', $tag[1]);
 				} else {
-					$tag[1] = str_replace('>', ' class="subscribe_me"', $tag[1]);
+					$tag[1] = str_replace('>', ' class="subscribe_me">', $tag[1]);
 				}
 				$before_widget = preg_replace("/^$tag[0]/", $tag[1], $before_widget);
 			} else {

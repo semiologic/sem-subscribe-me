@@ -36,6 +36,10 @@ If you require more dedicated assistance, consider using [Semiologic Pro](http:/
 
 == Change Log ==
 
+= 5.0.2 =
+
+- Fix occasional invalid HTML on manual calls
+
 = 5.0.1 =
 
 - Apply filters to permalinks
