@@ -3,7 +3,7 @@ Contributors: Denis-de-Bernardy, Mike_Koepke
 Donate link: http://www.semiologic.com/partners/
 Tags: subscribe-me, feed, rss, atom, subscribe-button, subscribe, semiologic
 Requires at least: 2.8
-Tested up to: 3.6
+Tested up to: 3.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -37,6 +37,12 @@ If you require more dedicated assistance, consider using [Semiologic Pro](http:/
 
 
 == Change Log ==
+
+= 5.3 =
+
+- Added Feedly RSS Reader service
+- Removed defunct Google Reader service
+- WP 3.8 compat
 
 = 5.2 =
 

@@ -3,20 +3,19 @@
 Plugin Name: Subscribe Me
 Plugin URI: http://www.semiologic.com/software/subscribe-me/
 Description: Widgets that let you display subscribe links to RSS readers such as Google Reader.
-Version: 5.2
+Version: 5.3
 Author: Denis de Bernardy & Mike Koepke
 Author URI: http://www.getsemiologic.com
 Text Domain: sem-subscribe-me
 Domain Path: /lang
+License: Dual licensed under the MIT and GPLv2 licenses
 */
 
 /*
 Terms of use
 ------------
 
-This software is copyright Mesoconcepts (http://www.mesoconcepts.com), and is distributed under the terms of the GPL license, v.2.
-
-http://www.opensource.org/licenses/gpl-2.0.php
+This software is copyright Denis de Bernardy & Mike Koepke, and is distributed under the terms of the MIT and GPLv2 licenses.
 
 Fam Fam Fam silk icon (feed_add and information) are copyright Mark James (http://www.famfamfam.com/lab/icons/silk/), and CC-By licensed:
 
@@ -45,12 +44,12 @@ class subscribe_me extends WP_Widget {
    	 * @return void
    	 **/
 
-   	function subscribe_me() {
+	public function __construct() {
         add_action('widgets_init', array($this, 'widgets_init'));
 
         if ( !is_admin() ) {
-        	add_action('wp_print_scripts', array($this, 'scripts'));
-        	add_action('wp_print_styles', array($this, 'styles'));
+        	add_action('wp_enqueue_scripts', array($this, 'scripts'));
+        	add_action('wp_enqueue_scripts', array($this, 'styles'));
         }
 
         foreach ( array(
@@ -123,7 +122,7 @@ class subscribe_me extends WP_Widget {
 
 	function styles() {
 		$folder = plugin_dir_url(__FILE__);
-		wp_enqueue_style('subscribe_me', $folder . 'css/styles.css', null, '20090903');
+		wp_enqueue_style('subscribe_me', $folder . 'css/styles.css', null, '20140104');
 	} # styles()
 	
 	
@@ -279,9 +278,9 @@ class subscribe_me extends WP_Widget {
 				'name' => __('Bloglines', 'sem-subscribe-me'),
 				'url' => 'http://www.bloglines.com/sub/%feed%',
 				),
-			'google' => array(
-				'name' => __('Google', 'sem-subscribe-me'),
-				'url' => 'http://www.google.com/ig/add?feedurl=%enc_feed%',
+			'feedly' => array(
+				'name' => __('Feedly', 'sem-subscribe-me'),
+				'url' => 'http://cloud.feedly.com/#subscription/feed/%enc_feed%',
 				),
 			'live' => array(
 				'name' => __('Live', 'sem-subscribe-me'),
@@ -485,7 +484,4 @@ function the_subscribe_links($instance = null, $args = '') {
 	the_widget('subscribe_me', $instance, $args);
 } # the_subscribe_links()
 
-
 $subscribe_me = new subscribe_me();
-
-?>
