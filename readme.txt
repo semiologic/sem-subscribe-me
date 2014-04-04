@@ -38,6 +38,10 @@ If you require more dedicated assistance, consider using [Semiologic Pro](http:/
 
 == Change Log ==
 
+= 5.4 =
+
+- Code refactoring
+
 = 5.3 =
 
 - Added Feedly RSS Reader service

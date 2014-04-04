@@ -3,7 +3,7 @@
 Plugin Name: Subscribe Me
 Plugin URI: http://www.semiologic.com/software/subscribe-me/
 Description: Widgets that let you display subscribe links to RSS readers such as Google Reader.
-Version: 5.3
+Version: 5.4 dev
 Author: Denis de Bernardy & Mike Koepke
 Author URI: http://www.getsemiologic.com
 Text Domain: sem-subscribe-me
@@ -27,8 +27,6 @@ Other icons are copyright their respective holders.
 **/
 
 
-load_plugin_textdomain('sem-subscribe-me', false, dirname(plugin_basename(__FILE__)) . '/lang');
-
 
 /**
  * subscribe_me
@@ -38,44 +36,80 @@ load_plugin_textdomain('sem-subscribe-me', false, dirname(plugin_basename(__FILE
  **/
 
 class subscribe_me extends WP_Widget {
-    /**
-   	 * subscribe_me()
-   	 *
-   	 * @return void
-   	 **/
+	/**
+	 * Plugin instance.
+	 *
+	 * @see get_instance()
+	 * @type object
+	 */
+	protected static $instance = NULL;
 
+	/**
+	 * URL to this plugin's directory.
+	 *
+	 * @type string
+	 */
+	public $plugin_url = '';
+
+	/**
+	 * Path to this plugin's directory.
+	 *
+	 * @type string
+	 */
+	public $plugin_path = '';
+
+	/**
+	 * Access this plugin’s working instance
+	 *
+	 * @wp-hook plugins_loaded
+	 * @return  object of this class
+	 */
+	public static function get_instance()
+	{
+		NULL === self::$instance and self::$instance = new self;
+
+		return self::$instance;
+	}
+
+	/**
+	 * Loads translation file.
+	 *
+	 * Accessible to other classes to load different language files (admin and
+	 * front-end for example).
+	 *
+	 * @wp-hook init
+	 * @param   string $domain
+	 * @return  void
+	 */
+	public function load_language( $domain )
+	{
+		load_plugin_textdomain(
+			$domain,
+			FALSE,
+			$this->plugin_path . 'lang'
+		);
+	}
+
+	/**
+	 * Constructor.
+	 *
+	 *
+	 */
 	public function __construct() {
-        add_action('widgets_init', array($this, 'widgets_init'));
+		$this->plugin_url    = plugins_url( '/', __FILE__ );
+		$this->plugin_path   = plugin_dir_path( __FILE__ );
+		$this->load_language( 'sem-subscribe-me' );
 
-        if ( !is_admin() ) {
-        	add_action('wp_enqueue_scripts', array($this, 'scripts'));
-        	add_action('wp_enqueue_scripts', array($this, 'styles'));
-        }
-
-        foreach ( array(
-        		'switch_theme',
-        		'update_option_active_plugins',
-        		'update_option_sidebars_widgets',
-        		'generate_rewrite_rules',
-
-        		'flush_cache',
-        		'after_db_upgrade',
-        		) as $hook ) {
-        	add_action($hook, array($this, 'flush_cache'));
-        }
-
-        register_activation_hook(__FILE__, array($this, 'flush_cache'));
-        register_deactivation_hook(__FILE__, array($this, 'flush_cache'));
+		add_action( 'plugins_loaded', array ( $this, 'init' ) );
 
    		$widget_ops = array(
    			'classname' => 'subscribe_me',
-   			'description' => __('Subscribe links to RSS readers such as Google Reader', 'sem-subscribe-me'),
+   			'description' => __('Subscribe links to RSS readers such as Feedly', 'sem-subscribe-me'),
    			);
    		$control_ops = array(
    			'width' => 330,
    			);
 
-   		$this->init();
    		$this->WP_Widget('subscribe_me', __('Subscribe Me', 'sem-subscribe-me'), $widget_ops, $control_ops);
    	} # subscribe_me()
 
@@ -99,6 +133,29 @@ class subscribe_me extends WP_Widget {
 				}
 			}
 		}
+
+		// more stuff: register actions and filters
+		add_action('widgets_init', array($this, 'widgets_init'));
+
+		if ( !is_admin() ) {
+			add_action('wp_enqueue_scripts', array($this, 'scripts'));
+			add_action('wp_enqueue_scripts', array($this, 'styles'));
+		}
+
+		foreach ( array(
+		    'switch_theme',
+		    'update_option_active_plugins',
+		    'update_option_sidebars_widgets',
+		    'generate_rewrite_rules',
+
+		    'flush_cache',
+		    'after_db_upgrade',
+		    ) as $hook ) {
+			add_action($hook, array($this, 'flush_cache'));
+		}
+
+		register_activation_hook(__FILE__, array($this, 'flush_cache'));
+		register_deactivation_hook(__FILE__, array($this, 'flush_cache'));
 	} # init()
 	
 	
@@ -482,6 +539,7 @@ function the_subscribe_links($instance = null, $args = '') {
 		));
 	
 	the_widget('subscribe_me', $instance, $args);
+
 } # the_subscribe_links()
 
-$subscribe_me = new subscribe_me();
+$subscribe_me = subscribe_me::get_instance();
