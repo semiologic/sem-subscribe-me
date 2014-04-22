@@ -1,83 +1,91 @@
-# Subscribe Me pot file.
-# Copyright (C) 2009 Mesoconcepts <http://www.mesoconcepts.com>
+# Copyright (C) 2014 Subscribe Me
 # This file is distributed under the same license as the Subscribe Me package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.0\n"
-"Report-Msgid-Bugs-To: https://tickets.semiologic.com\n"
-"POT-Creation-Date: 2009-09-06 17:48+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Project-Id-Version: Subscribe Me 5.4\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/sem-subscribe-me\n"
+"POT-Creation-Date: 2014-04-22 17:22:39+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: 8bit\n"
 
-#: sem-subscribe-me-info.php:2 sem-subscribe-me.php:115
+#. #-#-#-#-#  sem-subscribe-me.pot (Subscribe Me 5.4)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: sem-subscribe-me-info.php:2 sem-subscribe-me.php:113
 msgid "Subscribe Me"
 msgstr ""
 
+#. #-#-#-#-#  sem-subscribe-me.pot (Subscribe Me 5.4)  #-#-#-#-#
+#. Description of the plugin/theme
 #: sem-subscribe-me-info.php:3
 msgid ""
 "Widgets that let you display subscribe links to RSS readers such as Google "
 "Reader."
 msgstr ""
 
-#: sem-subscribe-me.php:108
-msgid "Subscribe links to RSS readers such as Google Reader"
+#: sem-subscribe-me.php:107
+msgid "Subscribe links to RSS readers such as Feedly"
 msgstr ""
 
-#: sem-subscribe-me.php:182
+#: sem-subscribe-me.php:261
 msgid "RSS Feed"
 msgstr ""
 
-#: sem-subscribe-me.php:189
+#: sem-subscribe-me.php:268
 msgid "RSS feed"
 msgstr ""
 
-#: sem-subscribe-me.php:252
+#: sem-subscribe-me.php:331
 msgid "Desktop Reader"
 msgstr ""
 
-#: sem-subscribe-me.php:256
+#: sem-subscribe-me.php:335
 msgid "Bloglines"
 msgstr ""
 
-#: sem-subscribe-me.php:260
-msgid "Google"
+#: sem-subscribe-me.php:339
+msgid "Feedly"
 msgstr ""
 
-#: sem-subscribe-me.php:264
+#: sem-subscribe-me.php:343
 msgid "Live"
 msgstr ""
 
-#: sem-subscribe-me.php:268
+#: sem-subscribe-me.php:347
 msgid "Netvibes"
 msgstr ""
 
-#: sem-subscribe-me.php:277
+#: sem-subscribe-me.php:351
 msgid "Yahoo!"
 msgstr ""
 
-#: sem-subscribe-me.php:281
-msgid "What's This?"
-msgstr ""
-
-#: sem-subscribe-me.php:323
+#: sem-subscribe-me.php:398
 msgid "Title:"
 msgstr ""
 
-#: sem-subscribe-me.php:334
+#: sem-subscribe-me.php:409
 msgid "Text:"
 msgstr ""
 
-#: sem-subscribe-me.php:355
+#: sem-subscribe-me.php:430
 msgid "Syndicate"
 msgstr ""
 
-#: sem-subscribe-me.php:356
+#: sem-subscribe-me.php:431
 msgid "Subscribe to this site's RSS feed."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.semiologic.com/software/subscribe-me/"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Denis de Bernardy & Mike Koepke"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.getsemiologic.com"
 msgstr ""
