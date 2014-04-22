@@ -220,12 +220,20 @@ class subscribe_me extends WP_Widget {
 				. $after_widget;
 			return;
 		}
-		
-		if ( $o = wp_cache_get($widget_id, 'widget') ) {
-			echo $o;
-			return;
+
+		$use_caching = true;
+		global $wp_version;
+		if ( version_compare( $wp_version, '3.9', '>=' ) )
+			if ( $this->is_preview() )
+				$use_caching = false;
+
+		if ( $use_caching ) {
+			if ( $o = wp_cache_get($widget_id, 'widget') ) {
+				echo $o;
+				return;
+			}
 		}
-		
+
 		# check if the widget has a class
 		if ( strpos($before_widget, 'subscribe_me') === false ) {
 			if ( preg_match("/^(<[^>]+>)/", $before_widget, $tag) ) {
@@ -312,9 +320,11 @@ class subscribe_me extends WP_Widget {
 				esc_url($feed_url),
 				),
 			$o);
-		
-		wp_cache_add($widget_id, $o, 'widget');
-		
+
+		if ( $use_caching ) {
+			wp_cache_add($widget_id, $o, 'widget');
+		}
+
 		echo $o;
 	} # widget()
 	
