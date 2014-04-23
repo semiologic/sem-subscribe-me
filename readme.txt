@@ -38,6 +38,10 @@ If you require more dedicated assistance, consider using [Semiologic Pro](http:/
 
 == Change Log ==
 
+= 5.4.1 =
+
+- Fix localization
+
 = 5.4 =
 
 - Use minified javascript file for improved performance
