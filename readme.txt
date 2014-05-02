@@ -38,6 +38,10 @@ If you require more dedicated assistance, consider using [Semiologic Pro](http:/
 
 == Change Log ==
 
+= 5.4.2 =
+
+- Clear internal cache upon WP upgrade
+
 = 5.4.1 =
 
 - Fix localization
