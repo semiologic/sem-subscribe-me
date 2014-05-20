@@ -38,6 +38,10 @@ If you require more dedicated assistance, consider using [Semiologic Pro](http:/
 
 == Change Log ==
 
+= 5.4.3 =
+
+- Use more full proof WP version check to alter plugin behavior instead of relying on $wp_version constant.
+
 = 5.4.2 =
 
 - Clear internal cache upon WP upgrade
