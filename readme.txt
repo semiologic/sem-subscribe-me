@@ -3,12 +3,12 @@ Contributors: Denis-de-Bernardy, Mike_Koepke
 Donate link: http://www.semiologic.com/partners/
 Tags: subscribe-me, feed, rss, atom, subscribe-button, subscribe, semiologic
 Requires at least: 2.8
-Tested up to: 3.9
+Tested up to: 4.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Adds widgets that let you display subscribe links to RSS readers such as Google Reader.
+Adds widgets that let you display subscribe links to RSS readers such as Feedly or Bloglines.
 
 
 == Description ==
@@ -37,6 +37,11 @@ If you require more dedicated assistance, consider using [Semiologic Pro](http:/
 
 
 == Change Log ==
+
+= 5.5 =
+
+- Fix hover when widget is used on a theme that has HTML5 markup.
+- WP 4.0 compatibility
 
 = 5.4.3 =
 

@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-	jQuery("div.subscribe_me, li.subscribe_me").hover(function() {
+	jQuery("aside.subscribe_me, div.subscribe_me, li.subscribe_me").hover(function() {
 		var p = jQuery(this);
 		var i = 0;
 		do {
