@@ -3,7 +3,7 @@
 Plugin Name: Subscribe Me
 Plugin URI: http://www.semiologic.com/software/subscribe-me/
 Description: RETIRED - Widgets that let you display subscribe links to RSS readers such as Google Reader.
-Version: 5.5.1
+Version: 5.5.2
 Author: Denis de Bernardy & Mike Koepke
 Author URI: https://www.semiologic.com
 Text Domain: sem-subscribe-me

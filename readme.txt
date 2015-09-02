@@ -8,12 +8,12 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-> *This plugin has been retired.  No further development will occur on it.*
-
 Adds widgets that let you display subscribe links to RSS readers such as Feedly or Bloglines.
 
 
 == Description ==
+
+> *This plugin has been retired.  No further development will occur on it.*
 
 The Subscribe Me plugin will add buttons that let your visitors share your content on [social media sites](http://www.semiologic.com/resources/blogging/help-with-feeds/) such as Bloglines or Google Reader.
 
