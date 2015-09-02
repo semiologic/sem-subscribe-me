@@ -1,12 +1,14 @@
 === Subscribe Me ===
 Contributors: Denis-de-Bernardy, Mike_Koepke
-Donate link: http://www.semiologic.com/partners/
+Donate link: https://www.semiologic.com/donate/
 Tags: subscribe-me, feed, rss, atom, subscribe-button, subscribe, semiologic
 Requires at least: 2.8
 Tested up to: 4.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+> *This plugin has been retired.  No further development will occur on it.*
 
 Adds widgets that let you display subscribe links to RSS readers such as Feedly or Bloglines.
 
@@ -25,9 +27,7 @@ The call accepts an optional argument, which sets the widget's title.
 
 = Help Me! =
 
-The [Semiologic forum](http://forum.semiologic.com) is the best place to report issues. Please note, however, that while community members and I do our best to answer all queries, we're assisting you on a voluntary basis.
-
-If you require more dedicated assistance, consider using [Semiologic Pro](http://www.getsemiologic.com).
+The [Plugin's Forum](https://wordpress.org/support/plugin/sem-subscribe-me) is the best place to report issues.
 
 
 == Installation ==
@@ -37,6 +37,12 @@ If you require more dedicated assistance, consider using [Semiologic Pro](http:/
 
 
 == Change Log ==
+
+= 5.5.1 =
+
+- Development has ceased on this plugin.  Updated source and readme accordingly
+- Updated to use PHP5 constructors as WP deprecated PHP4 constructor type in 4.3.
+- WP 4.3 compat
 
 = 5.5 =
 

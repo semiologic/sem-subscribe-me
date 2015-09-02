@@ -2,10 +2,10 @@
 /*
 Plugin Name: Subscribe Me
 Plugin URI: http://www.semiologic.com/software/subscribe-me/
-Description: Widgets that let you display subscribe links to RSS readers such as Google Reader.
-Version: 5.5
+Description: RETIRED - Widgets that let you display subscribe links to RSS readers such as Google Reader.
+Version: 5.5.1
 Author: Denis de Bernardy & Mike Koepke
-Author URI: http://www.getsemiologic.com
+Author URI: https://www.semiologic.com
 Text Domain: sem-subscribe-me
 Domain Path: /lang
 License: Dual licensed under the MIT and GPLv2 licenses
@@ -26,6 +26,9 @@ Large feed icons are copyright feedicons.com.
 Other icons are copyright their respective holders.
 **/
 
+/*
+ * This plugin has been retired.  No further development will occur on it.
+ * */
 
 
 /**
@@ -110,7 +113,7 @@ class subscribe_me extends WP_Widget {
    			'width' => 330,
    			);
 
-   		$this->WP_Widget('subscribe_me', __('Subscribe Me', 'sem-subscribe-me'), $widget_ops, $control_ops);
+   		parent::__construct('subscribe_me', __('Subscribe Me', 'sem-subscribe-me'), $widget_ops, $control_ops);
    	} # subscribe_me()
 
 	/**
